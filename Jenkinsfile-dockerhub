@@ -6,7 +6,7 @@ pipeline {
      }
     environment {
     DOCKERHUB_CREDENTIALS = credentials('kenDockerhub')
-    APP_NAME = "ktitilayo2class/amazon"
+    APP_NAME = "ktitilayo2/amazon"
     }
     stages { 
         stage('SCM Checkout') {
