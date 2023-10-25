@@ -31,22 +31,22 @@ pipeline {
             steps {
                 script {
                     // build image
-                    docker.build("335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejsapp:latest")
+                    docker.build("755537473478.dkr.ecr.us-east-1.amazonaws.com/amazonrepo:v1")
                 }
             }
         }
         stage('Trivy Scan (Aqua)') {
             steps {
-                sh 'trivy image --format template --output trivy_report.html 335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejsapp:latest'
+                sh 'trivy image --format template --output trivy_report.html 755537473478.dkr.ecr.us-east-1.amazonaws.com/amazonrepo:v1'
             }
        }
         stage('Push to ECR') {
             steps {
                 script{
                     //https://<AwsAccountNumber>.dkr.ecr.<region>.amazonaws.com/rekeyole-app', 'ecr:<region>:<credentialsId>
-                    docker.withRegistry('https://335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejsapp', 'ecr:eu-west-2:karo-ecr') {
+                    docker.withRegistry('https://755537473478.dkr.ecr.us-east-1.amazonaws.com/amazonrepo:v1', 'ecr:us-east-1:kenAcrAws') {
                     // build image
-                    def myImage = docker.build("335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejsapp:latest")
+                    def myImage = docker.build("755537473478.dkr.ecr.us-east-1.amazonaws.com/amazonrepo:v1")
                     // push image
                     myImage.push()
                     }
